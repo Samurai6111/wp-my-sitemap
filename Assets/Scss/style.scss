@@ -14,4 +14,25 @@
 //____________________________
 .wms {
 	padding-top: 4rem;
+
+	.wms__table {
+		max-width: 100%;
+		overflow-x: scroll;
+
+		.wms__tr {
+			.wms__th ,
+			.wms__td {
+				padding: 0.8rem;
+				border: 0.1rem solid;
+			}
+
+			.wms__th {
+				color: $white_fff;
+				background-color: $black_000;
+			}
+
+			.wms__td {
+			}
+		}
+	}
 }

@@ -8,6 +8,7 @@ class Wms_Get_Sitemap {
 			'_builtin' => false,
 		], 'objects', 'and');
 		$this->site_map = [];
+		$this->type_post = get_post_type_object('post');
 	}
 
 	/**
@@ -33,11 +34,18 @@ class Wms_Get_Sitemap {
 	 * アーカイブ一覧取得
 	 */
 	function get_archives() {
-		$archives_array = [];
+
 		$args = array(
 			'public'   => true,
 			'_builtin' => false,
 		);
+
+		$post_acrhive_array =	[
+			'url' => '',
+			'slug' => $this->type_post->name,
+			'title' => $this->type_post->label . ' アーカイブページ',
+		];
+		$this->site_map[] = $post_acrhive_array;
 
 		foreach ($this->post_types as $post_type) {
 			$archive_array = [];
@@ -47,6 +55,7 @@ class Wms_Get_Sitemap {
 			$this->site_map[] = $archive_array;
 		}
 
+
 		// return $archives_array;
 	}
 
@@ -54,7 +63,12 @@ class Wms_Get_Sitemap {
 	 * シングル一覧取得
 	 */
 	function get_singles() {
-		$singles_array = [];
+		$post_acrhive_array =	[
+			'url' => '',
+			'slug' => '投稿名',
+			'title' => $this->type_post->label . ' シングルページ',
+		];
+		$this->site_map[] = $post_acrhive_array;
 
 		foreach ($this->post_types as $post_type) {
 			$single_array = [];

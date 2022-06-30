@@ -378,17 +378,22 @@ html {
   clip: rect(0, 0, 0, 0);
 }
 
-th {
-  color: white;
-  background-color: #000000;
-}
-
-th,
-td {
-  padding: 8px;
-  border: 1px solid;
-}
-
 .wms {
   padding-top: 4rem;
+}
+
+.wms .wms__table {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+.wms .wms__table .wms__tr .wms__th,
+.wms .wms__table .wms__tr .wms__td {
+  padding: 0.8rem;
+  border: 0.1rem solid;
+}
+
+.wms .wms__table .wms__tr .wms__th {
+  color: #ffffff;
+  background-color: #000000;
 }

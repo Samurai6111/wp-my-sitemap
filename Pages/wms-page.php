@@ -7,12 +7,12 @@ $site_all_pages = $Get_Sitemap->get_results();
 	<div class="inner">
 		<h1 class="wms__title">サイトマップ</h1>
 
-		<table>
-			<tr>
-				<th>ID</th>
-				<th>タイトル</th>
-				<th>スラッグ</th>
-				<th>URL</th>
+		<table class="wms__table">
+			<tr class="wms__tr">
+				<th class="wms__th">ID</th>
+				<th class="wms__th">タイトル</th>
+				<th class="wms__th">スラッグ</th>
+				<th class="wms__th">URL</th>
 			</tr>
 
 			<?php
@@ -20,17 +20,17 @@ $site_all_pages = $Get_Sitemap->get_results();
 			foreach ($site_all_pages as $site_all_page) {
 				++$auto_crement_id;
 				 ?>
-				<tr>
-					<td>
+				<tr class="wms__tr">
+					<td class="wms__td">
 						<?php echo esc_html($auto_crement_id) ?>
 					</td>
-					<td>
+					<td class="wms__td">
 						<?php echo esc_html($site_all_page['title']) ?>
 					</td>
-					<td>
+					<td class="wms__td">
 						<?php echo esc_html($site_all_page['slug']) ?>
 					</td>
-					<td>
+					<td class="wms__td">
 						<?php echo esc_url($site_all_page['url']) ?>
 					</td>
 				</tr>

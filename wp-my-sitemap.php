@@ -64,7 +64,7 @@ function wms_view() {
  */
 function wms_load_css() {
 	global $wms_url;
-	wp_enqueue_style('wms_css', $wms_url . '/Assets/css/style.css', false, '1.0', 'all');
+	wp_enqueue_style('wms_css', $wms_url . '/Assets/Css/style.css', false, '1.1', 'all');
 }
 add_action('admin_enqueue_scripts', 'wms_load_css');
 
