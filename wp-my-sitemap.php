@@ -9,7 +9,7 @@ Description: Wordpressで管理画面でサイトマップを表示させるプ�
 Author: Shota Kawakatsu
 Author URI: https://github.com/Samurai6111
 Version: 1.0
-Plugin URI:
+Plugin URI: https://github.com/Samurai6111/wp-my-sitemap
 */
 
 /*--------------------------------------------------
