@@ -1,7 +1,7 @@
 <?php
 
 
-class Wms_Get_Sitemap {
+class mws_Get_Sitemap {
 	function __construct() {
 		$this->post_types = get_post_types([
 			'public'   => true,
