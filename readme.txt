@@ -1,4 +1,4 @@
-=== My wpdb ===
+=== WP My Sitemap ===
 Contributors: Samurai6111
 Tags: wp, sitemap, custom post
 Requires at least: 4.9
@@ -15,8 +15,8 @@ Requires PHP: 7.0
 == Installation ==
 
 1. From the WP admin panel, click “Plugins” -> “Add new”.
-2. In the browser input box, type “My wpdb”.
-3. Select the “My wpdb” plugin and click “Install”.
+2. In the browser input box, type “WP My Sitemap”.
+3. Select the “WP My Sitemap” plugin and click “Install”.
 4. Activate the plugin.
 
 OR…
