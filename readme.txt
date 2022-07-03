@@ -3,7 +3,7 @@ Contributors: Samurai6111
 Tags: wp, sitemap, custom post
 Requires at least: 4.9
 Tested up to: 6.0
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 7.0
@@ -38,4 +38,7 @@ OR…
 
 == Changelog ==
 2022/06/30 ver 1.0
-plugin created
+・plugin created
+
+2022/07/03 ver 1.1
+・page hierarchy added
