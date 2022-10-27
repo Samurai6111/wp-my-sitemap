@@ -82,11 +82,44 @@ class mws_Get_Sitemap {
 		return $this->get_hierarchy_level() + 1;
 	}
 
+	function get_theme_editor_url($template_file_path) {
+		// ?file=functions.php&theme=rampup
+		$current_theme_file = wp_get_theme()->stylesheet;
+		$theme_editor_url = admin_url(
+			'/theme-editor.php?'  .
+				'file=' . $template_file_path .
+				'&theme=' .  $current_theme_file
+		);
+
+		return $theme_editor_url;
+	}
+
+	/**
+	* ファイルが存在するかチェックする
+	*
+	* @param $file ファイルのパス
+	*/
+	function  file_checker($location){
+    //http://localhost/wordpress/wp-content/themes/THEMEName
+    $location = str_replace("http://","",$location);
+    $location = str_replace("https://","",$location);
+    $location = str_replace($_SERVER['HTTP_HOST'],"",$location);
+    $location = $_SERVER['DOCUMENT_ROOT'].$location;
+    $filename = $location;
+
+    if (file_exists($filename)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 	/**
 	 * 固定ページ一覧取得
 	 */
 	function get_pages() {
 		$page_list = get_pages();
+
 
 		foreach ($page_list as $page) {
 			/*--------------------------------------------------
@@ -96,9 +129,16 @@ class mws_Get_Sitemap {
 			$post_hierarchy = get_post_ancestors($page->ID);
 			$post_hierarchy_count = count($post_hierarchy);
 
+			$template_file_path = get_post_meta($page->ID, '_wp_page_template', true);
+			$template_file_name = pathinfo($template_file_path)['basename'];
+
+
 			$page_array['title']['title' . $post_hierarchy_count] = $page->post_title;
 			$page_array['slug']['slug0'] =  $page->post_name;
 			$page_array['url']['url0'] = get_permalink($page->ID);
+			$page_array['template_file']['template_file_url'] = $this->get_theme_editor_url($template_file_path);
+			$page_array['template_file']['template_file_name'] = $template_file_name;
+			$page_array['template_file']['template_file_path'] = get_template_directory_uri() . '/' .  $template_file_path;
 
 			$this->site_map_values[] = $page_array;
 		}
@@ -114,49 +154,71 @@ class mws_Get_Sitemap {
 			'_builtin' => false,
 		);
 
+		$archive_file = 'archive.php';
+
 		$post_acrhive_array =	[
 			'title' => ['title0' => $this->type_post->label . ' アーカイブページ'],
 			'slug' => ['slug0' => $this->type_post->name],
 			'url' => ['url0' => ''],
+			'template_file' => [
+				'template_file_url' => $this->get_theme_editor_url($archive_file),
+				'template_file_name' => $archive_file,
+				'template_file_path' => get_template_directory_uri() . '/' . $archive_file,
+			],
 		];
 		$this->site_map_values[] = $post_acrhive_array;
 
 		foreach ($this->post_types as $post_type) {
+			$custom_post_archive_file = 'archive-' . $post_type->name . '.php';
 			$archive_array = [];
 			$archive_array['title']['title0'] = 'カスタム投稿「' . $post_type->label . '」 アーカイブページ';
 			$archive_array['slug']['slug0'] = $post_type->name;
 			$archive_array['url']['url0'] = home_url('/' . $post_type->name);
+			$archive_array['template_file']['template_file_url'] = $this->get_theme_editor_url($custom_post_archive_file);
+			$archive_array['template_file']['template_file_name'] = $custom_post_archive_file;
+			$archive_array['template_file']['template_file_path'] = get_template_directory_uri() . '/' .$custom_post_archive_file;
+
 			$this->site_map_values[] = $archive_array;
 		}
-
-
-		// return $archives_array;
 	}
 
 	/**
 	 * シングル一覧取得
 	 */
 	function get_singles() {
+		$single_file = 'single.php';
 		$post_acrhive_array =	[
 			'title' => ['title0' => $this->type_post->label . ' シングルページ'],
 			'slug' => ['slug0' => '投稿名'],
 			'url' => ['url0' => ''],
+			'template_file' => [
+				'template_file_url' => $this->get_theme_editor_url($single_file),
+				'template_file_name' => $single_file,
+				'template_file_path' => get_template_directory_uri() . '/' . $single_file,
+			],
 		];
 		$this->site_map_values[] = $post_acrhive_array;
 
 		foreach ($this->post_types as $post_type) {
 			$single_array = [];
+			$custom_post_single_file = 'single-' . $post_type->name . '.php';
 
 			$single_array['title']['title0'] = 'カスタム投稿「' . $post_type->label . '」 シングルページ';
 			$single_array['slug']['slug0'] = '投稿名';
 			$single_array['url']['url0'] = home_url('/' . $post_type->name . '/投稿名');
+			$single_array['template_file']['template_file_url'] = $this->get_theme_editor_url($custom_post_single_file);
+			$single_array['template_file']['template_file_name'] = $custom_post_single_file;
+			$single_array['template_file']['template_file_path'] = get_template_directory_uri() . '/' .$custom_post_single_file;
+
+
 			$this->site_map_values[] = $single_array;
 		}
+
 	}
 
 	/**
-	* テーブルのヘッドを取得
-	*/
+	 * テーブルのヘッドを取得
+	 */
 	function get_sitemap_head() {
 		$site_map_head_array = [
 			'ID' => ['id' => 'ID'],
@@ -175,6 +237,7 @@ class mws_Get_Sitemap {
 
 		$site_map_head_array['slug'] = ['slug' => 'スラッグ'];
 		$site_map_head_array['url'] = ['url' => 'URL'];
+		$site_map_head_array['template_file'] = ['template_file' => 'テンプレートファイル'];
 
 		return $site_map_head_array;
 	}
@@ -187,8 +250,6 @@ class mws_Get_Sitemap {
 		$this->get_pages();
 		$this->get_archives();
 		$this->get_singles();
-
-
 
 		return $this->site_map_values;
 	}

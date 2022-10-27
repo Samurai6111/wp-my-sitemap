@@ -390,6 +390,7 @@ html {
 .mws .mws__table .mws__tr .mws__th,
 .mws .mws__table .mws__tr .mws__td {
   padding: 0.8rem;
+  white-space: nowrap;
   border: 0.1rem solid;
 }
 

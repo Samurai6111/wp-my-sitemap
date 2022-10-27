@@ -24,7 +24,6 @@ $get_hierarchy_level_1 = $Get_Sitemap->get_hierarchy_level_1();
 
 			<?php
 			$auto_crement_id = 0;
-
 			foreach ($site_all_pages as $site_all_page) {
 				++$auto_crement_id;
 			?>
@@ -52,6 +51,23 @@ $get_hierarchy_level_1 = $Get_Sitemap->get_hierarchy_level_1();
 					</td>
 					<td class="mws__td">
 						<?php echo esc_url($site_all_page['url']['url0']) ?>
+					</td>
+					<td class="mws__td">
+						<?php
+						$template_file_url = $site_all_page['template_file']['template_file_url'];
+						$template_file_path = $site_all_page['template_file']['template_file_path'];
+						$template_file_name = $site_all_page['template_file']['template_file_name'];
+
+
+						if ($Get_Sitemap->file_checker($template_file_path)) {
+							$href = 'href=' . esc_url($template_file_url) ;
+						} else {
+							$href = null;
+						}
+							?>
+							<a <?php echo esc_attr($href) ?> target="_blank" rel="noopener">
+								<?php echo esc_html($template_file_name) ?>
+							</a>
 					</td>
 				</tr>
 

@@ -2,8 +2,8 @@
 Contributors: Samurai6111
 Tags: wp, sitemap, custom post
 Requires at least: 4.9
-Tested up to: 6.0
-Stable tag: 1.1
+Tested up to: 6.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 7.0
@@ -42,3 +42,6 @@ OR…
 
 2022/07/03 ver 1.1
 ・page hierarchy added
+
+2022/10/27 ver 1.2
+・version updated

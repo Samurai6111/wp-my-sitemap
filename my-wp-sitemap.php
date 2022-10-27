@@ -8,7 +8,7 @@ Text Domain: my_plugin
 Description: Wordpressで管理画面でサイトマップを表示させるプラグイン
 Author: Shota Kawakatsu
 Author URI: https://github.com/Samurai6111
-Version: 1.1
+Version: 1.2
 Plugin URI: https://github.com/Samurai6111/wp-my-sitemap
 */
 
